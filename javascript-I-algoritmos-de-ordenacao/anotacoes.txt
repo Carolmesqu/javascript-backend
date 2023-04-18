@@ -1,0 +1,109 @@
+Que algoritmos são sequências finitas de passos lógicos para a resolução 
+de um problema e que podem representar tanto problemas comuns em programação 
+quanto qualquer situação que envolva passos lógicos;
+
+Que pensar de forma algorítmica não se resume a código e nem precisa 
+necessariamente começar pelo código em si;
+
+Como traduzir os passos de um algoritmo para a linguagem de programação que 
+escolhemos trabalhar (no caso, JavaScript), através de estruturas fundamentais 
+da linguagem como variáveis, laços de repetição e condicionais.
+
+Que, da mesma forma que criamos “algoritmos mentais” para encontrar o menor valor 
+de uma lista, fazemos um processo parecido para ordenar uma lista;
+
+Como podemos abstrair os passos que fazemos “de cabeça” para código, observando 
+a sequência dos passos utilizados;
+
+Que, para resolver um problema, muitas vezes utilizamos mais de um algoritmo; 
+para resolver isso, criamos a função menorValor() para reaproveitar o código 
+junto com o Selection Sort.
+
+Que um problema pode ser resolvido com algoritmos diferentes, por exemplo, um 
+problema de ordenação resolvido com Selection Sort ou Insertion Sort;
+
+Que, apesar do resultado final ser o mesmo, o processo (ou passos lógicos) de 
+cada um dos algoritmos é diferente;
+
+A criar funções para melhor reaproveitamento de código, como para fazer o Insertion 
+Sort receber uma lista de produtos diversos;
+
+Que, além das formas linear e quadrática, existem outras formas de cálculo de 
+complexidade de um algoritmo, como a constante;
+
+Que é bem fácil “explodir” a capacidade de processamento de um computador com 
+uma quantidade grande de operações, devido à influência da quantidade de dados na 
+curva de complexidade de um algoritmo;
+
+Que devemos levar esse índice de crescimento em conta na hora de definirmos qual 
+algoritmo será utilizado para resolver um problema, especialmente quando envolve 
+grandes quantidades de dados e para isso podemos utilizar a análise assintótica 
+e a notação O grande;
+
+Que existem várias notações e vários algoritmos “prontos”, como o Selection Sort e 
+o Insertion Sort, entre diversos outros, cada um com suas vantagens e desvantagens.
+
+-------------------------------------------------------------------------------------
+
+A praticar mais com testes de mesa e ver o código funcionando passo a passo, e como 
+isso pode nos ajudar a entender melhor como o código de um algoritmo funciona.
+
+Ao começarmos o estudo de algoritmos, é comum nos depararmos com a expressão Big O 
+Notation (ou Notação “O Grande”).
+
+Essa notação é utilizada para expressar a complexidade de um algoritmo, com relação 
+ao tempo e volume de recursos computacionais necessários para executar esse algoritmo, 
+de acordo com o volume de dados de entrada. Em geral, utiliza-se o tempo de uso de CPU 
+(unidade central de processamento) do computador.
+
+Ou seja, usamos O para classificar funções (implementações de algoritmos) de acordo com 
+a forma como crescem em complexidade. Algoritmos diferentes podem crescer em complexidade 
+da mesma forma, então podem ter a mesma classificação O, como vimos durante o curso com o 
+Selection Sort e o Insertion Sort.
+
+Podemos classificar os exemplos que vimos durante a aula da seguinte forma:
+
+notação	nome
+O(n)	linear
+O(n²)	quadrático
+A função menorValor() é um exemplo de algoritmo de crescimento linear: o “custo” (referente 
+à quantidade total de operações necessárias) depende da quantidade de elementos na lista; 
+uma lista de 10 elementos resulta em 10 operações de busca e uma lista de 1000 elementos 
+resulta em 1000 operações. Ou seja, menorValor() tem complexidade de O(n), onde n é o tamanho 
+(quantidade de elementos) da lista.
+
+Já nas funções selectionSort() e insertionSort(), vimos que um laço de repetição dentro do 
+outro faz com que a taxa de crescimento não aumenta mais de forma linear com relação à quantidade
+ de elementos na lista, porém de forma quadrática, pois um laço dentro de outro significa que a 
+ quantidade de operações será de n*n (sendo n a quantidade de elementos). Ou seja, selectionSort() 
+ e insertionSort() têm complexidade de O(n²).
+
+Como os exemplos que vimos na planilha e nos gráficos da aula, existem outras formas de avaliar o 
+crescimento de um algoritmo, e que também podem ser representada segundo a notação O grande:
+
+notação	nome
+O(n)	linear
+O(n²)	quadrático
+O(1)	constante
+O(log(n))	logarítmica
+O(nc)	polinomial
+O(cn)	exponencial
+
+A notação O grande não é usada apenas em computação, mas também em várias áreas da matemática e 
+existem outras notações na lista além dos exemplos que utilizamos.
+
+Uma função que incrementa o valor de uma variável, por exemplo:
+
+function incrementa(valor) {
+ return ++valor;
+}
+
+É um algoritmo de crescimento constante.
+
+A análise assintótica serve para comparar e decidir se determinado algoritmo é o mais eficiente 
+para resolver um problema; fatores como velocidade de processamento não são considerados nessa 
+análise pois o que conta é o crescimento da complexidade em si (considerando o aumento na quantidade 
+de dados processados) e não a quantidade de recursos disponíveis em si.
+
+É possível combinar algoritmos de diversas complexidades, como fizemos ao combinar menorValor() com 
+selectionSort().
