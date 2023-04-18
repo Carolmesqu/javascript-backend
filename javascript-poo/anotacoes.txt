@@ -1,0 +1,704 @@
+Além do paradigma orientado a objetos, temos também outras formas de lidar e organizar os programas. Uma forma 
+muito comum de categorizar esses paradigmas é dividi-los entre paradigmas imperativos ou declarativos.
+
+Os paradigmas imperativos são aqueles que usam afirmações para alterar o estado de um programa, da mesma forma 
+como o modo verbal imperativo no português expressa um comando ou ordem para ser executada. Essa categoria se 
+preocupa com o “como” uma tarefa vai ser executada, o seu passo-a-passo e a sequência dessas etapas. Alguns 
+dos paradigmas que se encaixam aqui são os seguintes:
+
+Estrutural
+Procedural
+Orientado a objetos
+Um exemplo que mostra o paradigma imperativo é a implementação da seguinte função que recebe um vetor e 
+retorna outro vetor com cada um dos valores dobrado:
+
+function dobra(vetor){
+    let resultados = [];
+    for (let i = 0; i < vetor.length ; i++){
+        resultados.push(vetor[i] * 2);
+}
+return resultados;
+}
+
+Podemos notar que passamos as instruções de como percorrer o vetor, qual operação fazer e o que devemos 
+adicionar ao resultado.
+
+Uma outra categoria de paradigma é o declarativo. Podemos dizer que uma característica dele é expressar 
+a lógica de um processo sem descrever o seu controle de fluxo. Ou seja, é associado ao “o quê” uma 
+tarefa vai resultar ou retornar. Um paradigma que pode se encaixar nessa categoria é o paradigma funcional.
+
+Uma implementação declarativa do mesmo problema de dobrar os valores de um vetor pode ser feita da 
+seguinte forma:
+
+function dobra(vetor){
+return vetor.map((item) => item * 2);
+}
+
+Podemos observar que não foi necessário explicitar como iterar sobre o laço de repetição ou atribuir 
+os novos valores.
+
+No cotidiano temos diversos outros exemplos de afirmações que podem ser consideradas declarativas, 
+como arquivos HTML:
+
+<h1> Programação Declarativa</h1>
+<p> Estou declarando como quero que o texto apareça, e não dizendo para o computador como renderizar 
+um texto</p>
+
+Ou até mesmo as queries SQL, nas quais apenas dizemos qual resultado esperamos, sem especificar como 
+a busca deve ser feita:
+
+SELECT * FROM Alunos WHERE Escola=’Alura’;
+
+O JavaScript e algumas outras linguagens podem utilizar mais de um paradigma. É comum ouvir o termo 
+“multiparadigma” quando nos referimos a esse tipo de linguagem, e isso traz alguns benefícios, pois 
+permite perfis diferentes de desenvolvedores e sistemas utilizarem uma linguagem em comum.
+
+Claro que um paradigma não é necessariamente melhor que o outro, mas dependendo das circunstâncias 
+podemos utilizar um que seja mais otimizado para determinada aplicação. Algumas funcionalidades 
+precisam alterar o estado de uma aplicação, não podendo ser escritas de forma declarativa, assim como 
+os códigos declarativos que utilizamos podem ter uma implementação imperativa por baixo dos panos.
+
+----------------------------------------------------------------------------------------------------------------
+
+Existe uma forma muito prática de ilustrar sistemas, controles de fluxo e outros comportamentos chamado 
+UML. A UML é a Linguagem de Modelagem Unificada - do inglês Unified Modeling Language.
+
+Ela consiste na padronização de algumas notações para facilitar o entendimento entre os times de 
+desenvolvimento que eventualmente irão lidar com um determinado sistema.
+
+Um dos diagramas mais comuns de ser representado utilizando a UML é o diagrama de classe. A função dele é 
+representar as estruturas e relações entre as classes de um projeto e interfaces com outros sistemas. 
+Aqui está um exemplo:
+
+Neste diagrama, representamos a existência de uma relação por uma reta e as associações são indicadas por 
+setas. Os números que acompanham as retas indicam a quantidade de itens que estão se relacionando. No exemplo, 
+1 cliente pode possuir 0 ou mais contratos de aluguel, enquanto um contrato de aluguel só pode se referir a 0 
+ou 1 veículo alugado.
+
+Existem outras versões de diagramas de classe que incluem, por exemplo, os tipos de variáveis dos dados associados, 
+informações sobre tipos de dados abstratos, relações de herança e composição de classes e métodos que são 
+implementados pelas classes.
+
+Atualmente, a UML é mantida por um consórcio internacional que regula esse padrão. Existem diversos programas 
+disponíveis que nos permitem descrever em um código próprio um diagrama e exportar as imagens que ilustram o 
+sistema, como o PlantUML.
+
+----------------------------------------------------------------------------------------------------------------
+
+Durante a aula, vimos que um dos campos do objeto User no diagrama UML utilizava não o formato String ou Number, 
+mas sim o formato Date.
+
+Vamos ver um pequeno resumo do que se trata.
+
+Como o nome sugere, o Date é um objeto utilizado para trabalhar as datas e o tempo em JavaScript. No dia a dia de 
+desenvolvimento é muito comum precisarmos utilizar a informação da data e hora para realizar alguma tarefa ou, 
+especialmente, lidar com dados. No entanto, em JavaScript, essa mesma informação pode assumir diferentes tipos.
+
+Vamos supor que você decida utilizar a variável tempo para guardar uma informação da data e, para obter o valor, 
+você decida chamar o método Date() do objeto Date:
+
+let dataEHora = Date() // utilizando a chamada de função diretamente
+console.log(dataEHora)
+ // Mon Jan 31 2022 23:44:05 GMT-0300 (Brasilia Standard Time)
+console.log(typeof dataEHora)
+ // string
+
+Como podemos ver, a saída da variável é a data completa (no padrão de Brasília, nesse cenário específico) e 
+o tipo da variável dataEHora é string.
+
+Em outro cenário, suponhamos que você decida utilizar a mesma variável dataEHora para guardar a informação 
+da data mas, diferentemente do primeiro caso onde você chamou apenas o método Date() para recuperar a informação, 
+você agora crie uma instância do objeto Date. 
+
+let dataEHora = new Date() // utilizando o construtor do objeto Date
+console.log(dataEHora)
+ // 2022-02-01T02:46:51.517Z
+console.log(typeof dataEHora)
+ // object
+
+ A informação então recuperada é a mesma mas os tipos são diferentes. Mas qual o propósito disso?
+
+A razão por trás desse comportamento é que, quando utilizamos um construtor, também temos acesso a todos os 
+métodos do objeto Date. Podemos ver melhor essa diferença nos exemplos a seguir:
+
+let dataComConstrutor = new Date()
+let data1 = dataComConstrutor.getDate()
+console.log(data1) //31
+
+Acima, utilizamos o método getDate(), que já existe em qualquer objeto criado a partir de Date(), para 
+obter o dia do mês.
+
+let dataFuncao = Date()
+let data2 = dataFuncao.getDate()
+ //TypeError: dataFuncao.getDate is not a function
+
+Já no exemplo acima, vemos que uma data gerada através da chamada da função Date() diretamente não pode 
+acessar os demais métodos do objeto Date, ao passo que ao gerarmos uma nova instância desse objeto é 
+possível acessar todos os métodos definidos dentro deste objeto, como por exemplo getDate().
+
+Alguns exemplos de outros métodos disponíveis no objeto Date são:
+
+.getMillisseconds()
+.getSeconds()
+.getMinutes()
+.getHours()
+.getDay()
+.getMonth()
+.getFullYear()
+
+Em seguida vamos estudar mais sobre o new, funções construtoras e métodos de objetos. Porém você pode 
+sempre acessar a documentação do MDN e testar os vários formatos de data possíveis.
+ 
+----------------------------------------------------------------------------------------------------------------
+
+Durante esta aula, vimos qual o problema que a programação orientada a objetos se propõe a resolver e também 
+revisamos como funciona um objeto literal.
+
+Sobre as características dos objetos e as motivações da orientação a objetos, podemos afirmar que:
+
+Escolha as alternativas corretas.
+
+A programação orientada a objetos busca abstrair conceitos da vida real para estruturas de código que possam 
+ser reaproveitadas e combinadas, visando aproximar a lógica dos problemas que o sistema deve resolver.
+
+R: O conceito central da POO é a criação e manutenção de objetos, conjuntos de chave/valor onde os valores 
+podem ser tanto dados primitivos/estruturados (as propriedades) quanto funções (os métodos). A partir destes 
+“modelos”, chamados de classes, pode-se criar cópias de objetos que têm a mesma estrutura, propriedades e 
+métodos, e as classes refletem partes do negócio como produto, usuario, pedido, carro, etc.
+
+Um objeto pode receber como valores dados primitivos e estruturados, como strings, números, booleanos, 
+arrays e até mesmo outros objetos.
+
+R: É possível estruturar um objeto com tipos diversos de dados para cada propriedade:
+
+const objProduto = {
+ tipo: "caneca",
+ preco: 10,
+ tamanho: {
+   grande: '300ml',
+   pequena: '120ml'
+ },
+ fragil: true,
+ cores: ['preto', 'branco', 'azul']
+}
+
+Objetos são tipos de dados que procuram corresponder à coisas do mundo real (físicas ou abstratas).
+
+R: Um programa que faça gerenciamento de compras pode ter tanto objetos que se refletem no mundo físico 
+(como produto ou cliente) quanto no abstrato (como oferta e pedido).
+
+----------------------------------------------------------------------------------------------------------------
+
+Qual é a motivação e a base conceitual da programação orientada a objetos, que é abstrair modelos a partir de 
+conceitos da vida real e estruturar a forma como o programa é desenvolvido a partir destes modelos;
+
+Quais são as características de um objeto literal: um tipo de dado composto de pares de chave/valor, 
+com valores que podem ser tanto dados primitivos quanto arrays e outros objetos (também chamados de propriedades) 
+e funções que dão comportamento ao objeto (também chamados de métodos);
+
+Sobre o princípio de usar modelos (ou classes) para criar cópias (ou instâncias) de um objeto e como isso ajuda 
+a reaproveitar código;
+
+A estrutura e os conceitos por trás do UML (Linguagem de Modelagem Unificada), linguagem que oferece uma série 
+de ferramentas e padrões para definirmos as classes de um sistema, quais métodos serão necessários e quais seus 
+desdobramentos.
+
+----------------------------------------------------------------------------------------------------------------
+
+Durante as aulas usamos bind() para ligar (bind) o valor de this a um determinado contexto. Existem outros dois 
+métodos para manipular o contexto de this:
+
+call()
+O método call() executa a função passando valores e parâmetros específicos para serem usados como contexto do 
+this. Ou seja, é possível atribuir um this diferente do contexto atual ao executar a função.
+
+Um exemplo de uso de call() para especificar o contexto de this:
+
+function exibeInfos() {
+ console.log(this.nome, this.email)
+}
+
+const user = {
+ nome: 'Mariana',
+ email: 'm@m.com'
+}
+
+exibeInfos.call(user)
+
+Fazendo com que a função seja executada em determinado contexto, mesmo após ser instanciada:
+
+function User(nome, email) {
+ this.nome = nome
+ this.email = email
+
+ this.exibeInfos = function(){
+   console.log(this.nome, this.email)
+ }
+}
+
+const newUser = new User('mariana', 'm@m.com')
+
+const outroUser = {
+ nome: 'Rodrigo',
+ email: 'r@r.com'
+}
+
+newUser.exibeInfos() //mariana m@m.com
+newUser.exibeInfos.call(outroUser) //Rodrigo r@r.com
+
+Também é possível passar parâmetros para call(), como no exemplo a seguir.
+
+Temos uma função que monta uma determinada mensagem a partir dos parâmetros nome e email. Se quiséssemos 
+vincular os dados da mensagem a um objeto com dados de usuários, podemos usar call() passando como primeiro 
+parâmetro o contexto a ser considerado como this (no caso, objeto user) e a partir do segundo parâmetro 
+definimos quais os argumentos.
+
+function exibeMensagem(nome, email) {
+ console.log(`usuário: ${nome}, email ${email}`)
+}
+ const user = {
+ nome: 'Mariana',
+ email: 'm@m.com',
+ executaFuncao: function(fn) {
+   fn.call(user, this.nome, this.email)
+ }
+}
+
+user.executaFuncao(exibeMensagem) //usuário: Mariana, email m@m.com
+
+Nesse caso, a função que será executada também está sendo passada como parâmetro de executaFuncao e usamos call() 
+para “chamar” a função com um contexto (this) específico e também argumentos específicos.
+
+apply()
+O método apply() funciona de forma semelhante ao call(), porém recebe a lista de argumentos em um array:
+
+function exibeMensagem(nome, email) {
+ console.log(`usuário: ${nome}, email ${email}`)
+}
+ const user = {
+ nome: 'Mariana',
+ email: 'm@m.com',
+ executaFuncao: function(fn) {
+   fn.apply(user, [this.nome, this.email])
+ }
+}
+ user.executaFuncao(exibeMensagem) //usuário: Mariana, email m@m.com
+
+ Usando arrays, é possível passar os argumentos via variável ou até mesmo usando a propriedade arguments que 
+ existe internamente em todo objeto.
+
+ ----------------------------------------------------------------------------------------------------------------
+
+ Uma factory function (“função fábrica”) é como chamamos, em JavaScript, uma função que retorna um objeto.
+
+Exemplo de factory function:
+
+function criaUser(nome, email) {
+ return {
+   nome,
+   email,
+   exibeInfos() {
+     return `${nome}, ${email}`
+   }
+ }
+}
+
+Veja que, um pouco diferente do que foi feito na aula, não se trata de um objeto literal mas sim uma função 
+que retorna (através da palavra-chave return) um objeto.
+
+A função acima, quando executada com os parâmetros necessário, vai retornar um objeto com duas propriedades 
+(nome e email) e um método interno (exibeInfos()):
+
+const newUser = criaUser('Rodrigo', 'r@r.com')
+console.log(newUser)
+console.log(newUser.exibeInfos())
+
+O retorno esperado no terminal:
+
+{
+  nome: 'Rodrigo',
+  email: 'r@r.com',
+  exibeInfos: [Function: exibeInfos]
+}
+
+Rodrigo, r@r.com
+
+As factory functions são diferentes das funções construtoras. Veja um exemplo de função construtora, como 
+fizemos anteriormente durante a aula:
+
+function User(nome, email) {
+ this.nome = nome
+ this.email = email
+
+ this.exibeInfos = function() {
+   return `${nome}, ${email}`
+ }
+}
+
+As funções construtoras devem ser chamadas com o operador new para criar instâncias do objeto User:
+
+const newUser = new User('Mariana', 'm@m.com')
+console.log(newUser)
+console.log(newUser.exibeInfos())
+
+O retorno no console é praticamente o mesmo, com exceção que agora exibeInfos() é uma função anônima 
+e o objeto é explicitamente uma instância de User:
+
+User {
+  nome: 'Mariana',
+  email: 'm@m.com',
+  exibeInfos: [Function (anonymous)]
+}
+
+Mariana, m@m.com
+
+No caso da factory function não há perda de contexto na execução dos métodos internos.
+
+Quais as diferenças e qual devo usar?
+
+Não há consenso, pois ambas têm vantagens e desvantagens. A sintaxe da função construtora é mais confortável 
+para quem está acostumado com o uso de classes; já a factory function é mais flexível a respeito do tipo de 
+objeto que será retornado.
+
+Boa parte dos frameworks e bibliotecas do NodeJS vão trabalhar com classes ou construtores, instanciados com new.
+
+----------------------------------------------------------------------------------------------------------------
+
+Durante esta aula, vimos como a orientação a objetos é implementada no JavaScript sem a utilização da sintaxe 
+de classes, e demos atenção especial ao this e ao conceito de cadeia de protótipo.
+
+Baseado nisso, podemos afirmar que:
+
+A sintaxe de classe não existia no JavaScript até o ES6, e foi implementada como “açúcar sintático” por cima 
+do modelo de protótipo nativo do JavaScript. Isso aconteceu por, entre outros fatores, uma demanda da comunidade 
+dev que já estava acostumada a utilizar classes em orientação a objetos e preferia essa forma a ter que utilizar 
+os protótipos.
+
+R: Embora hoje em dia seja possível programar em JavaScript utilizando apenas a sintaxe de classe, é importante 
+saber o que acontece “por baixo dos panos”, pois alguns aspectos da cadeia de protótipo (como o próprio objeto 
+prototype) muitas vezes acabam aparecendo durante o dia a dia do desenvolvimento, especialmente quando temos 
+que resolver bugs.
+
+A palavra-chave this se refere ao contexto em que uma função está sendo executada; esse contexto só é 
+determinado no momento da chamada da função e só é possível saber qual será o valor de this para uma função se 
+soubermos em que contexto esta função será executada - em outras palavras, a que objeto ela fará referência.
+
+R: O this é uma das palavras-chave mais importantes para se compreender como os objetos funcionam no javaScript, 
+independente de ser um projeto orientado a objetos ou não. Para trabalharmos com this sempre precisamos ter em 
+mente qual o contexto em que uma função é executada.
+
+No modelo de protótipo, os objetos “herdam” recursos uns dos outros através da chamada propriedade protótipo. 
+Quando criamos um objeto e definimos seu protótipo através de Object.setPrototypeOf(objetoQueHerda, objetoBase), 
+estabelecemos uma cadeia de protótipos que começa no próprio tipo Object e vai até o último nível de objeto criado 
+através dessa cadeia.
+
+R: A cadeia de protótipos é a base original de programação orientada a objetos com JavaScript. Praticamente tudo, 
+em JavaScript, é considerado um objeto, e estes objetos recebem um protótipo, de onde vêm as propriedades e 
+métodos que todos os objetos do mesmo tipo compartilham.
+
+----------------------------------------------------------------------------------------------------------------
+
+O que é a palavra-chave this e sua importância na manipulação de objetos com JavaScript, uma vez que o this 
+representa o contexto em que determinada função ou método será executada, e como este contexto pode ser 
+identificado e modificado utilizando os métodos bind(), call() e apply();
+
+Como funciona a criação de objetos em JavaScript com o modelo de protótipo, que é a forma nativa do JavaScript 
+trabalhar com o conceito de orientação a objetos conhecido como “herança”, quando objetos recebem propriedades 
+e métodos de outros;
+
+Como acessar as propriedades prototype e __proto__ e, através delas, identificar a cadeia de protótipos desde 
+o nível mais baixo, normalmente um objeto do próprio tipo de dado, como Object ou Function;
+
+As duas formas (anteriores às classes) que o JavaScript utiliza para criação de objetos a partir de modelos: 
+Object.create() e funções construtoras com new; sendo o primeiro mais indicado para se trabalhar com protótipos 
+utilizando as melhores práticas e o segundo mais próximo à sintaxe de classes.
+
+----------------------------------------------------------------------------------------------------------------
+
+Nesta aula estudamos um dos principais conceitos da orientação a objetos: o que são classes, de que forma 
+são utilizadas e como funciona a herança de classe.
+
+Recapitulando o que vimos, assinale as alternativas corretas:
+
+A herança de classe é importante para um melhor reaproveitamento de código, uma vez que permite a criação de 
+novas funcionalidades com base em um modelo; além disso, faz com que os objetos e as regras de negócio criadas 
+pelo sistema façam sentido e de fácil abstração.
+
+R: Com a herança de classe, podemos organizar o sistema de forma que suas entidades façam sentido entre si, 
+e reaproveitamos melhor o código. Por exemplo: seres humanos, gatos e pássaros são animais e poderiam “herdar” 
+propriedades de uma superclasse Animal, com propriedades e métodos em comum. Assim pode acontecer com carros, 
+comidas, usuários de um sistema, etc.
+
+As classes não são a forma nativa do JavaScript trabalhar com orientação a objetos e foram desenvolvidas sobre 
+o modelo de protótipo.
+
+R: Como fizemos durante a aula, é possível verificar isso através do método isPrototypeOf(), como no exemplo:
+NomeDaClasse.prototype.isPrototypeOf(subclasse);
+
+O constructor() é uma função especial que recebe, via parâmetros, as propriedades que um objeto precisa ter ao 
+ser instanciado a partir de uma classe; também é através do construtor que uma classe herda métodos e propriedades 
+da superclasse através da função super(). Porém, dependendo da necessidade do projeto, uma classe pode não ter um 
+construtor, apenas métodos.
+
+R: Apesar de ser necessário quando uma classe precisa receber propriedades no momento em que é instanciada e 
+também para que a herança de classe funcione, o construtor não é obrigatório; uma classe pode ter somente métodos 
+ou não receber nenhuma propriedade no momento em que é instanciada.
+
+----------------------------------------------------------------------------------------------------------------
+
+O que são e como funcionam as classes, elementos essenciais para se trabalhar com orientação a objetos em grande 
+parte das linguagens de programação voltadas para este paradigma. As classes fornecem um modelo para a criação de 
+cópias (instâncias) de objetos que compartilham dos mesmos tipos de propriedades e métodos;
+
+O conceito de herança de classe, também importante para se trabalhar com orientação a objetos, como criar subclasses 
+que herdam propriedades e métodos de uma superclasse e como reaproveitar estas propriedades e métodos da superclasse 
+através da função super();
+
+Como uma subclasse pode ter propriedades e métodos próprios, além dos recebidos da superclasse, e como declarar 
+isso no código criando novos métodos;
+
+A praticar a sintaxe de classe com JavaScript, criando classes, subclasses, propriedades, construtores e métodos.
+
+----------------------------------------------------------------------------------------------------------------
+
+Durante a aula conhecemos os chamados assessors, ou métodos que dão acesso a determinadas propriedades. Os getters 
+retornam valores e os setters definem valores. Mas será que estes métodos são sempre necessários, em todas as classes?
+
+Assim como a função constructor(), os assessors podem ser utilizados somente quando as funcionalidades são realmente 
+necessárias. Por exemplo, um getter pode ser utilizado para retornar um dado da classe de uma forma específica (juntando 
+nome e sobrenome como vimos durante a aula, ou qualquer outro caso). Um setter é útil quando se deseja executar algum 
+código sempre que alguma propriedade é definida ou sofre alguma modificação - por exemplo, códigos que façam validação 
+de campos. Os assessors também atuam na segurança de uma classe, encapsulando dados quando necessário.
+
+Durante a prática do desenvolvimento com classes, você terá a oportunidade de praticar cada caso e também ver situações 
+onde os assessors não são necessários, ou o constructor(). Como dizemos para quase tudo em programação, “depende”!
+
+----------------------------------------------------------------------------------------------------------------
+
+Na atividade anterior sobre atributos privados vimos um exemplo de código onde, ao invés de get e set, foram utilizadas 
+funções para esse papel:
+
+class User {
+ _nome = '';
+
+ setNome(nome) {
+   this._nome = nome;
+ }
+
+ getNome() {
+   return this._nome;
+ }
+}
+
+É possível usar métodos como assessors, como visto acima. Porém, há algumas vantagens na utilização de get/set:
+
+Apesar de serem métodos, a sintaxe para uso do get e set é a mesma que utiilizamos para acessar/modificar propriedades 
+públicas normalmente, o que faz sentido com a ideia do encapsulamento de “expôr” somente o que é necessário da classe. 
+Por outro lado, na forma acima, os métodos são acessados com a sintaxe usual de execução de função (usando parênteses).
+
+Por exemplo, usando funções como assessors teríamos as seguintes chamadas de método:
+
+const nome = novoUser.getNome() //getter
+novoUser.setNome('Pedro') //setter
+novoUser.exibeInfos() // método normal
+
+Utilizando get e set:
+
+const nome = novoUser.nome //getter
+novoUser.nome = 'Pedro' //setter
+novoUser.exibeInfos() // método normal
+
+Dessa forma, o uso de get/set ajuda na legibilidade.
+
+Além disso, os assessor têm, em si mesmos, limitações quanto aos parâmetros aceitos: get não aceita nenhum parâmetro e 
+set apenas um parâmetro (referente ao dado que será definido), o que ajuda a garantir que não irão receber parâmetros 
+“inesperados” que podem causar bugs. O mesmo comportamento pode ser implementado em métodos normais, por meio de 
+validações, porém isso torna o desenvolvimento menos ágil.
+
+Na verdade (como em vários outros aspectos do desenvolvimento com JavaScript) não há consenso quanto ao uso de métodos 
+normais no lugar de assessors e você vai encontrar as mais diversas opiniões sobre esse assunto. Como há outras linguagens 
+de programação que não têm assessors e utilizam funções como getters/setters, pessoas que já desenvolvem nestas linguagens 
+podem transferir sua experiência para o JavaScript. Porém, agora que você já conhece os dois casos, já fica mais fácil 
+identificar e ler códigos que implementam o encapsulamento das duas formas.
+
+----------------------------------------------------------------------------------------------------------------
+
+Você está trabalhando em um sistema de gerenciamento de usuários e pediu a um colega que implementasse uma classe para o 
+usuário padrão. Como todo cadastro de usuários sempre envolve dados sensíveis, a especificação da classe pede que as 
+propriedades sejam privadas.
+
+Um tempo depois, você recebe o seguinte código:
+
+class User {
+ #nome
+ #email
+ #cpf
+  constructor(nome, email, cpf) {
+   this.#nome = nome
+   this.#email = email
+   this.#cpf = cpf
+ }
+
+ get nome() {
+   return this.nome
+ }
+}
+
+Você tem a impressão de que seu colega se distraiu na implementação, mas resolve testar e conferir.
+
+Se executarmos o código abaixo para testar a classe:
+
+const novoUser = new User('Carol', 'c@c.com', '12312312312')
+console.log(novoUser.nome)
+
+Qual será o resultado?
+
+R: O terminal exibirá um erro do tipo RangeError: Maximum call stack size exceeded.
+
+Você notou que o get retorna não a propriedade #nome, mas sim nome. Embora sejam consideradas como variáveis 
+diferentes pelo JavaScript, esse código irá resultar em um stack overflow, pois a propriedade nome sendo chamada 
+dentro do getter get nome() (ambas com a mesma nomenclatura) faz com que o getter seja chamado dentro dele mesmo, 
+de forma recursiva, causando o “estouro” na pilha de processos do NodeJS.
+
+----------------------------------------------------------------------------------------------------------------
+
+O conceito de encapsulamento, que é a ação (ou ações) de “esconder” atributos de uma classe, para evitar acesso 
+indevido a atributos importantes ou dados sensíveis, ou que métodos sejam utilizados de forma errada;
+
+Como utilizar a sintaxe de atributos privados do JavaScript, através do prefixo #, para que a própria linguagem de
+ programação faça a “segurança” da classe, impedindo o acesso externo a propriedades e métodos assinalados como 
+ privados com este prefixo;
+
+A criar métodos assessors para “expôr” e permitir acesso e modificação de propriedades de forma controlada e restrita, 
+através do uso das funções get para retornar dados específicos e set para definir dados específicos.
+
+----------------------------------------------------------------------------------------------------------------
+
+Como vimos até o momento, a linguagem JavaScript possui muitas particularidades e uma delas é sua própria 
+abordagem para implementação do paradigma de Programação Orientada a Objetos (muito diferente de Java, por 
+exemplo).
+
+Depois que as classes começaram a fazer parte do JavaScript com o lançamento do ES6, outras necessidades 
+surgiram e elementos importantes foram requisitados pela comunidade dev. Um deles é a aplicação do conceito 
+de interfaces.
+
+O que são interfaces?
+Precisamos lembrar que embora o paradigma POO seja aplicável, JavaScript não nasceu como uma linguagem orientada 
+a objetos a linguagem. Originalmente é multi-paradigma e de tipagem dinâmica, isso significa que suporta 
+diferentes formatos de escrita de código (os paradigmas), como o orientado a objetos, imperativo e funcional.
+
+Quando desenvolvemos em orientação a objetos com JavaScript, estamos trabalhando com uma linguagem baseada em 
+protótipos de objetos, ou seja, como vimos na aula sobre o modelo de protótipos, tudo em JavaScript é um 
+objeto! pois podemos clonar e estender objetos.
+
+Um exemplo é a partir da criação do objeto Fruta, vamos imaginar que esse objeto representa todas as propriedades 
+e funcionalidades das frutas em geral. Dessa forma, a partir do objeto Fruta, podemos clonar propriedades gerais 
+e específicas para criar um novo objeto. Por conseguinte, vamos representar uma nova fruta chamada Banana a 
+partir de Fruta e assim sucessivamente. Se aplicarmos o conceito de classe a esse caso, uma class Fruta pode 
+ser estendida para uma class Banana.
+
+Além disso, o JavaScript é uma linguagem fracamente tipada (você pode ver mais sobre tipagem neste artigo). 
+Por conta disso, o JavaScript não possui suporte e não trabalha com interfaces, que é um conceito próprio 
+da orientação a objetos e normalmente aplicado em linguagens compiladas e fortemente tipadas. Vamos entender 
+melhor?
+
+As interfaces possuem um papel muito importante na programação orientada a objetos, uma vez que esse paradigma 
+é baseado na ideia de que os objetos apresentam uma interação entre si. Nesse sentido, as interfaces de um 
+objeto funcionam como uma coleção de métodos pelos quais é possível realizar essas interações.
+
+Imagine uma fôrma pré-definida/moldada para alguma coisa. As interfaces funcionam de forma similar, é como 
+um “contrato de código”, onde você pode nomear, parametrizar ou descrever exatamente quais serão os tipos 
+de objetos gerados a partir desse “molde”.
+
+Normalmente você pode usar interfaces em TypeScript durante a criação do contrato que as classes devem seguir 
+e os membros da interface que essa classe deve implementar. Além disso, você pode representar os tipos na 
+sua aplicação, assim como sua declaração normal de tipo de dado. Interface então é uma estrutura que define 
+um contrato na sua aplicação, e as classes que derivam de uma interface obrigatoriamente devem seguir a 
+estrutura fornecida pela interface, ou seja, devem seguir seus tipos e métodos. O compilador do TypeScript 
+não converte interfaces para JavaScript, e imaginem a confusão que seria se esse conceito fosse aplicado a 
+uma linguagem fracamente tipada...
+
+A interface é construída por meio da checagem de tipos, que são as conhecidas “duck typing” (tipagem pato) 
+ou a “structural subtyping” (subtipagem estrutural).
+
+O duck typing, comum em linguagens fracamente tipadas, é como costuma-se chamar o “teste do pato” para um 
+objeto: “Se anda como um pato, nada como um pato e grasna como um pato, então deve ser um pato”. Ou seja, 
+não interessa se estamos falando de um pato de verdade, interessa que ele se parece com um. Traduzindo isso 
+para programação, não nos interessa o tipo do objeto, mas sim o que o objeto consegue fazer, ou seja, se ele 
+tem determinados métodos e propriedades. Para declarar uma interface em TypeScript, utilizamos a palavra 
+reservada interface e podemos inserir as propriedades e declarar os métodos com uma função ou arrow function:
+
+interface User {
+    nome: string;
+    sobrenome: string;
+    nomeCompleto(): string;
+}COPIAR CÓDIGO
+Aqui a única função da interface é descrever um tipo.
+
+Agora vamos implementar a interface declarando uma variável do tipo Empregado. Ela irá preencher esse 
+ e passará valores às propriedades nome e sobrenome, e o método nomeCompleto precisa combinar as duas 
+ propriedades e retornar o resultado.
+
+let empregado: Empregado = {
+    nome : "Haroldo",
+    sobrenome: "Calvin",
+    nomeCompleto(): string {
+        return this.nome + " " + this.sobrenome;
+    }
+}
+
+empregado.nome = 20;  //* Error - Type 'number' is not assignable to type 'string'COPIAR CÓDIGO
+Essa verificação garante que 20, um dado do tipo Number, não será atribuído a empregado.nome, justamente 
+porque está esperando uma String.
+
+O uso de interfaces é útil para validar e documentar a forma que os objetos serão passados como 
+parâmetros e objetos retornados de funções, assim como suas propriedades. É indiscutível que essa 
+prática irá garantir a detecção de erros mais rapidamente pois você não precisará buscá-los após o 
+runtime da sua aplicação.
+
+----------------------------------------------------------------------------------------------------------------
+
+Durante o curso conhecemos os princípios básicos da orientação a objetos: objeto, classe, herança, 
+encapsulamento e polimorfismo. Vamos relembrar tudo o que foi estudado?
+
+Polimorfismo é o princípio segundo o qual duas (ou mais) classes que herdam de uma superclasse podem executar 
+métodos vindos dessa superclasse e que têm a mesma assinatura, porém comportamentos diferentes da superclasse 
+da qual herdaram.
+
+R: É possível sobrescrever o comportamento de uma classe para que corresponda ao que for necessário para a 
+subclasse, porém desde que mantendo a mesma assinatura do método herdado da superclasse.
+
+O encapsulamento é o conceito de “esconder” propriedades e métodos para que não possam ser acessados por fora da 
+classe, o que pode ser feito com o uso de atributos privados e propriedades assessors.
+
+R: Como vimos na aula 4, ambas as ferramentas trabalham em conjunto: os atributos privados evitam que 
+propriedades e/ou métodos sejam acessados por outras partes do código, enquanto os assessors (getters e 
+setters) expõem apenas as partes da classe que devem ser expostas, e de quais formas isso pode acontecer.
+
+As classes em JavaScript foram implementadas a partir do modelo de herança de protótipo e podem ser consideradas 
+como uma “abstração” deste conceito para tornar a experiência da programação orientada a objetos mais “palatável” 
+(o que chamamos de “açúcar sintático” (syntatic sugar).
+
+R: Porém, apesar de serem como uma camada de abstração sobre os protótipos, as classes possuem algumas diferenças 
+de implementação a nível de linguagem e também de performance.
+
+O código abaixo representa um objeto sendo instanciado através de uma função construtora:
+
+function User(nome, email) {
+ this.nome = nome;
+ this.email = email;
+}
+
+const novoUser = new User('Ricardo', 'r@r.com')
+console.log(novoUser)
+
+R: Funções construtoras têm uma estrutura um pouco diferente das funções comuns (por exemplo, a sintaxe de atribuição 
+de propriedades com =) e servem de modelo para criação de objetos através do operador new.
+
+----------------------------------------------------------------------------------------------------------------
+
+Que chamamos de polimorfismo a alteração de um método de uma classe para que, na subclasse, o método tenha a 
+mesma assinatura porém um comportamento diferente do método executado no contexto da superclasse;
+
+Que existe uma série de princípios de design de código pensados para a programação orientada a objetos, que 
+estão compilados no acrônimo SOLID.
